@@ -20,7 +20,7 @@
 			<option></option>
 			<option>CEO</option>
 			<option>Manager</option>
-			<option>HR-Manager</option>
+			<option>HR Manager</option>
 			<option>Consultant</option>
 			<option>Trainer</option>
 			<option>Trainee</option>
