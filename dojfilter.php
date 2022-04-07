@@ -14,11 +14,6 @@
 				text-align: center;
 			}
 		</style>
-		<h4>Select the Date to Search</h4>
-		<form action="dojfilter.php" method="post">
-			<input type="date" name="emp_doj">
-			<button type="submit" name="submit">SEARCH</button>
-		</form>
 		<br>
 		<?php 
 			require 'dbconnect.php';

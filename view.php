@@ -13,10 +13,6 @@
 	td{
 		text-align: center;
 	}
-	button .down {
-  		transform: rotate(45deg);
-  		-webkit-transform: rotate(45deg);
-	}
 </style>
 <form method="post">
 	<label>Choose a Filter Method</label>
@@ -25,16 +21,39 @@
 		<option value="filterbydoj">Date of Joining</option>
 		<option value="filterbydesignation">Designation</option>
 	</select>
-	<button type="submit" name="submit">SUBMIT</button>
+	<button type="submit" name="submitfilter">SUBMIT</button>
 </form><br>
 <?php 
-	if (isset($_POST['submit'])) {
-		if($_POST['filter']=='filterbydoj'){
-			header("Location: dojfilter.php");
-		}
+	if (isset($_POST['submitfilter'])) {
+		if($_POST['filter']=='filterbydoj'){ 
+	?>
+		<h4>Select the Date to Search</h4>
+		<form action="dojfilter.php" method="post">
+			<input type="date" name="emp_doj">
+			<button type="submit" name="submit">SEARCH</button>
+		</form>
+		<?php 
+			if (isset($_POST['submit'])) {
+				dojFilter($emp_doj);
+			}
+		 ?>
+<?php		}
 		elseif ($_POST['filter']=='filterbydesignation') {
-			header("Location: designationfilter.php");
-		}
+			 ?>
+			<h4>Enter the Designation to search</h4>
+			<form action="designationfilter.php" method="post">
+			<select name="designation">
+				<option></option>
+				<option>CEO</option>
+				<option>Manager</option>
+				<option>HR Manager</option>
+				<option>Consultant</option>
+				<option>Trainer</option>
+				<option>Trainee</option>
+			</select>
+			<button name="submit">FILTER</button>
+		</form>
+<?php		}
 	}
  ?>
 <br>
@@ -48,10 +67,10 @@
 		<option value="sortstatusasc">Sort by Status in ascending</option>
 		<option value="sortstatusdesc">Sort by Status in descending</option>
 	</select>
-	<button type="submit" name="submit">SUBMIT</button>
+	<button type="submit" name="submitsort">SUBMIT</button>
 </form><br>
 <?php 
-	if (isset($_POST['submit'])) {
+	if (isset($_POST['submitsort'])) {
 		if($_POST['sort']=='sortiddesc'){
 			header("Location: sortingiddesc.php");
 		}
@@ -81,17 +100,43 @@
 			<table><tr><th>Employee ID</th><th>Employee Name</th><th>Designation</th><th>E-Mail ID</th><th>Date of Joining</th><th>Mobile Number</th><th>Employee Status</th><th>Action</th></tr>
 				<?php while($data=mysqli_fetch_assoc($result)){
 					echo "<tr><td> ".$data['employee_id']."</td><td> ".$data['employee_name']."</td><td>".$data['employee_designation']."</td><td>".$data['employee_mail_id']."</td><td>".$data['employee_doj']."</td><td>".$data['employee_phone']."</td><td>".$data['employee_status']."</td>" ;
-			?>
-			<td><a href="edit.php?id=<?php echo $data["employee_id"]; ?>"><button>EDIT</button></a></td></tr>
+			?>	<td><a href="edit.php?id=<?php echo $data["employee_id"]; ?>"><button>EDIT</button></a>
+				<a href="delete.php?id=<?php echo $data["employee_id"]; ?>"><button>DELETE</button></a></td></tr>	
 			<?php
-				}
+				} 
 				echo "</table>";
-				}
-				else{
-					echo "No data found";
-				}
-				mysqli_close($conn);
-
-			?>
+			}  
+		else{
+				echo "No data found";
+		}
+		mysqli_close($conn);
+	?>
 </body>
 </html>
+<?php 
+	require 'dbconnect.php';
+	function dojFilter($emp_doj)
+		{
+			$sql="SELECT * FROM employee_details WHERE employee_doj=$emp_doj"
+			$result=mysqli_query($conn,$sql);
+			if ($result) {
+				$rowCount=mysqli_num_rows($result);
+				if($rowCount>0){
+			?>		
+					<br>
+					<table><tr><th>Employee ID</th><th>Employee Name</th><th>Designation</th><th>E-Mail ID</th><th>Date of Joining</th><th>Mobile Number</th><th>Employee Status</th><th>Action</th></tr>
+						<?php while($data=mysqli_fetch_assoc($result)){
+							echo "<tr><td> ".$data['employee_id']."</td><td> ".$data['employee_name']."</td><td>".$data['employee_designation']."</td><td>".$data['employee_mail_id']."</td><td>".$data['employee_doj']."</td><td>".$data['employee_phone']."</td><td>".$data['employee_status']."</td>" ;
+					?>	<td><a href="edit.php?id=<?php echo $data["employee_id"]; ?>"><button>EDIT</button></a>
+						<a href="delete.php?id=<?php echo $data["employee_id"]; ?>"><button>DELETE</button></a></td></tr>	
+					<?php
+						} 
+						echo "</table>";
+					}  
+				else{
+						echo "No data found";
+				}
+			}
+		}
+ ?>
+
