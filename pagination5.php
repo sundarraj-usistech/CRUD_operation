@@ -21,8 +21,7 @@
 	$result=mysqli_query($conn,$sql);
 	$rowCount=mysqli_num_rows($result);
 	$totalPages=ceil($rowCount/$perPageDisplay);
-?>
-<br>        
+?>      
 <?php
 	$sql="SELECT * FROM employee_details LIMIT $startFrom,$perPageDisplay";
 	$result=mysqli_query($conn,$sql);

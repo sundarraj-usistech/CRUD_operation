@@ -11,6 +11,6 @@
 				header("Location: view.php?deleted employee ".$emp_name." Successfully");
 			}
 			else if($result==false){
-				header("Location: view.php?error=deleting Unsuccessfull..!");
+				header("Location: delete.php?error=deleting Unsuccessfull..!");
 			}	
  ?>
