@@ -7,21 +7,22 @@
 	if ($rowCount>0) { ?>
 		<?php while ($row=mysqli_fetch_assoc($result)) { ?>
 				<form method="post">
+					<h4>Edit the Details Here</h4>
 					<table>
 						<tr><td><label>Employee ID</label></td>
-						<td><input type="text" name="id" value="<?php echo $row['employee_id']; ?>"></td></tr><br>
+						<td><input type="text" name="id" value="<?php echo $row['employee_id']; ?>"></td></tr>
 						<tr><td><label>Employee Name</label></td>
-						<td><input type="text" name="name" value="<?php echo $row['employee_name']; ?>"></td></tr><br>
+						<td><input type="text" name="name" value="<?php echo $row['employee_name']; ?>"></td></tr>
 						<tr><td><label>Employee Designation</label></td>
-						<td><input type="text" name="designation" value="<?php echo $row['employee_designation']; ?>"></td></tr><br>
+						<td><input type="text" name="designation" value="<?php echo $row['employee_designation']; ?>"></td></tr>
 						<tr><td><label>Employee Mail ID</label></td>
-						<td><input type="text" name="email" value="<?php echo $row['employee_mail_id']; ?>"></td></tr><br>
+						<td><input type="text" name="email" value="<?php echo $row['employee_mail_id']; ?>"></td></tr>
 						<tr><td><label>Employee Date of Joining</label></td>
-						<td><input type="text" name="doj" value="<?php echo $row['employee_doj']; ?>"></td></tr><br>
+						<td><input type="text" name="doj" value="<?php echo $row['employee_doj']; ?>"></td></tr>
 						<tr><td><label>Employee Mobile Number</label></td>
-						<td><input type="text" name="mobile" value="<?php echo $row['employee_phone']; ?>"></td></tr><br>
+						<td><input type="text" name="mobile" value="<?php echo $row['employee_phone']; ?>"></td></tr>
 						<tr><td><label>Employee Status</label></td>
-						<td><input type="text" name="status" value="<?php echo $row['employee_status']; ?>"></td></tr><br>
+						<td><input type="text" name="status" value="<?php echo $row['employee_status']; ?>"></td></tr>
 					</table>
 					<br>
 					<button type="submit" name="submit">EDIT</button>
