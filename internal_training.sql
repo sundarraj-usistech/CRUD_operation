@@ -64,13 +64,7 @@ INSERT INTO `employee_details` (`employee_id`, `employee_name`, `employee_design
 (10020, 'name13', 'Trainee', 'name13@abc.com', '2022-01-14', '9197000012', 'Inactive'),
 (10021, 'name14', 'Trainee', 'name14@abc.com', '2022-01-17', '9797979797', 'Inactive'),
 (10022, 'name15', 'Trainee', 'name15@abc.com', '2022-01-17', '9197000014', 'Inactive'),
-(10026, 'name16', 'Trainee', 'name16@abc.com', '2022-01-17', '9197000015', 'Inactive'),
-(10027, 'name17', 'Trainee', 'name17@abc.com', '2022-01-19', '9197000016', 'Active'),
-(10029, 'name18', 'Trainee', 'name18@abc.com', '2022-01-20', '9197000017', 'Active'),
-(10070, 'name40', 'Trainee', 'name40@abc.com', '2022-01-24', '0422 2658664', 'Active'),
-(10071, 'name42', 'Trainee', 'name42@abc.com', '2022-03-01', '0422 2658662', 'Active'),
-(10073, 'name41', 'Trainee', 'name41@abc.com', '2022-03-07', '0422 2658667', 'Active'),
-(10075, 'dary', 'Trainee', 'dary@abc.com', '2022-03-07', '0422 2658669', 'Active');
+
 
 --
 -- Indexes for dumped tables
