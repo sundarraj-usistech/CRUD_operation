@@ -68,7 +68,6 @@
 				<option><?php echo $row['employee_designation']; ?></option>
 		<?php		
 				}
-			
 			echo "</select>";
 			}
 		?>		<button name="submitdesignation">SUBMIT</button>
@@ -84,6 +83,7 @@
 					header("Location: designationfilter.php?&designation=".$emp_designation);
 		}
 	?>
+	<br>
 <div class="method">	
 	<form method="post">
 		<label>Choose a Sorting Method</label>
