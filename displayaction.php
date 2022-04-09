@@ -31,15 +31,18 @@
 	</form>
 </div>
 <br>
+<div align="right">
 <?php 
 	if (isset($_POST['submitfilter'])) {
 		if($_POST['filter']=='filterbydoj'){ 
-	 ?>		<label>Select the Date to Search</label>
+	 ?>		
 	 <?php 
 			$sql="SELECT DISTINCT employee_doj FROM employee_details";
 			$result=mysqli_query($conn,$sql);
 			if ($result) {
-	?><form>
+	?>
+	<form>
+		<label>Select the Date to Search</label>
 		<select name="doj">
 		<?php 
 			while ($row=mysqli_fetch_assoc($result)) {
@@ -55,12 +58,13 @@
 <?php }
 		elseif ($_POST['filter']=='filterbydesignation') { 
 	?>
-			<label>Select the Designation to Search</label>
+			
 	<?php		
 			$sql="SELECT DISTINCT employee_designation FROM employee_details";
 			$result=mysqli_query($conn,$sql);
 			if ($result) {
 		?><form>
+			<label>Select the Designation to Search</label>
 			<select name="designation">
 			<?php 
 				while ($row=mysqli_fetch_assoc($result)) {
@@ -71,9 +75,10 @@
 			echo "</select>";
 			}
 		?>		<button name="submitdesignation">SUBMIT</button>
-			</form>
+			</form>	
 <?php		}
-		} 
+		}
+	echo "</div>";
 		if (isset($_GET['submitdate'])) {
 					$emp_doj=$_GET['doj'];
 					header("Location: dojfilter.php?&doj=".$emp_doj);
