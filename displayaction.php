@@ -34,31 +34,49 @@
 <?php 
 	if (isset($_POST['submitfilter'])) {
 		if($_POST['filter']=='filterbydoj'){ 
-	 ?>		<p>Select the Date to Search</p>
-			<form>
-				<input type="date" name="emp_doj">
-				<button name="submitdate">SEARCH</button></a>
-			</form>
-<?php }
-		elseif ($_POST['filter']=='filterbydesignation') {
-			 ?>
-			<h4>Enter the Designation to search</h4>
-			<form>
-			<select name="designation">
-				<option></option>
-				<option>CEO</option>
-				<option>Manager</option>
-				<option>HR Manager</option>
-				<option>Consultant</option>
-				<option>Trainer</option>
-				<option>Trainee</option>
-			</select>
-			<button name="submitdesignation">FILTER</button>
+	 ?>		<label>Select the Date to Search</label>
+	 <?php 
+			$sql="SELECT DISTINCT employee_doj FROM employee_details";
+			$result=mysqli_query($conn,$sql);
+			if ($result) {
+	?><form>
+		<select name="doj">
+		<?php 
+			while ($row=mysqli_fetch_assoc($result)) {
+		?>
+			<option><?php echo $row['employee_doj']; ?></option>
+	<?php		
+			}
+		
+		echo "</select>";
+		}
+	?>		<button name="submitdate">SUBMIT</button>
 		</form>
+<?php }
+		elseif ($_POST['filter']=='filterbydesignation') { 
+	?>
+			<label>Select the Designation to Search</label>
+	<?php		
+			$sql="SELECT DISTINCT employee_designation FROM employee_details";
+			$result=mysqli_query($conn,$sql);
+			if ($result) {
+		?><form>
+			<select name="designation">
+			<?php 
+				while ($row=mysqli_fetch_assoc($result)) {
+			?>
+				<option><?php echo $row['employee_designation']; ?></option>
+		<?php		
+				}
+			
+			echo "</select>";
+			}
+		?>		<button name="submitdesignation">SUBMIT</button>
+			</form>
 <?php		}
 		} 
 		if (isset($_GET['submitdate'])) {
-					$emp_doj=$_GET['emp_doj'];
+					$emp_doj=$_GET['doj'];
 					header("Location: dojfilter.php?&doj=".$emp_doj);
 		}
 		if (isset($_GET['submitdesignation'])) {

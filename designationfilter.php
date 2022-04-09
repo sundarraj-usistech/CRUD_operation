@@ -8,7 +8,6 @@
 	if ($rowCount>0) {
 		display($result);
 	}
-	
 	else{
 		echo "No data found";
 	}
