@@ -9,7 +9,7 @@
 			display($result);
 	}
 	else {
-		echo " No Records found";
+		echo " No data found";
 	}
 	mysqli_close($conn);
 ?>

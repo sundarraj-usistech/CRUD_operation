@@ -1,32 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title></title>
-</head>
-<body>
-<style type="text/css">
-	table,th, td{
-		border: 1px solid black;
-	}
-	td{
-		text-align: center;
-	}
-</style>
-<form>
-		<label>Number of Rows to display</label>
-		<input type="number" name="pagestodisplay">
-		<button>SELECT</button>
-</form>
-	<br>
-	<?php
+<?php
 		require 'dbconnect.php'; 
-		if (isset($_GET['pagestodisplay'])) {
-			$perPageDisplay=$_GET['pagestodisplay'];
+		require 'displayaction.php';
+		if (isset($_GET['pages'])) {
+			$perPageDisplay=$_GET['pages'];
 		}
 		else{
-			$perPageDisplay=5;
+			$perPageDisplay=10;
 		}
 		if (isset($_GET['page'])) {
 			$currentPage=$_GET['page'];	
@@ -39,21 +18,18 @@
 		$result=mysqli_query($conn,$sql);
 		$rowCount=mysqli_num_rows($result);
 		$totalPages=ceil($rowCount/$perPageDisplay);
+
 		$sql1="SELECT * FROM employee_details LIMIT $startFrom,$perPageDisplay";
 		$result1=mysqli_query($conn,$sql1);
 		$rowCount1=mysqli_num_rows($result1);
-		if($rowCount>0){ 
-			echo "<table><tr><th>Employee ID</th><th>Employee Name</th><th>Designation</th><th>E-Mail ID</th><th>Date of Joining</th><th>Mobile Number</th><th>Employee Status</th></tr>";
-			while($data=mysqli_fetch_assoc($result1)){
-				echo "<tr><td> ".$data['employee_id']."</td><td> ".$data['employee_name']."</td><td>".$data['employee_designation']."</td><td>".$data['employee_mail_id']."</td><td>".$data['employee_doj']."</td><td>".$data['employee_phone']."</td><td>".$data['employee_status']."</td>" ;
-			}
-			echo "</table>";
-			echo "<br>";
+		if($rowCount1>0){
+			display($result1);
+		} 
+		else{
+			echo "No data found";
 		}
 		for ($i=1; $i<=$totalPages; $i++) {
-	    echo'<a href="paginationselection.php?page='.$i.'&pagestodisplay='.$perPageDisplay.'"><button>'.$i.'</button></a>';
+	    echo'<a href="paginationselection.php?page='.$i.'&pages='.$perPageDisplay.'"><button>'.$i.'</button></a>';
     	}
 	mysqli_close($conn);
-	?>	
-</body>
-</html>
+?>
