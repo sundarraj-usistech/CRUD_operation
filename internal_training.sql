@@ -63,7 +63,7 @@ INSERT INTO `employee_details` (`employee_id`, `employee_name`, `employee_design
 (10019, 'name12', 'Trainee', 'name12@abc.com', '2022-01-14', '9197000011', 'Active'),
 (10020, 'name13', 'Trainee', 'name13@abc.com', '2022-01-14', '9197000012', 'Inactive'),
 (10021, 'name14', 'Trainee', 'name14@abc.com', '2022-01-17', '9797979797', 'Inactive'),
-(10022, 'name15', 'Trainee', 'name15@abc.com', '2022-01-17', '9197000014', 'Inactive'),
+(10022, 'name15', 'Trainee', 'name15@abc.com', '2022-01-17', '9197000014', 'Inactive');
 
 
 --
