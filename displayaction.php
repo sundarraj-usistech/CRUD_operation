@@ -134,7 +134,7 @@
 <?php 
 	if (isset($_GET['submitpageselection'])) {
 		$pageDisplay=$_GET['pagestodisplay'];
-		header("Location: paginationselection.php?pages=".$pageDisplay);
+		header("Location: view.php?pages=".$pageDisplay);
 	}
  ?>
 <br>
@@ -147,6 +147,6 @@
 				<a href="delete.php?id=<?php echo $data["employee_id"]; ?>"><button>DELETE</button></a></td></tr>	
 			<?php
 				} 
-			echo "</table>";
+			echo "</table><br>";
 	}
 ?>
