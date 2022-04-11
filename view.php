@@ -1,36 +1,44 @@
 <?php 
-	require 'dbconnect.php'; 
-	require 'displayaction.php';
-	if (isset($_GET['pages'])) {
-		$perPageDisplay=$_GET['pages'];
-	}
-	else{
-		$perPageDisplay=5;
-	}
-	if (isset($_GET['page'])) {
-		$currentPage=$_GET['page'];	
-	}
-	else{
-		$currentPage=1;
-	} 
-	$startFrom=($currentPage-1)*$perPageDisplay;
-	$sql="SELECT * FROM employee_details";
+	require 'dbconnect.php';
+	$id=$_GET['id'];
+	$sql="SELECT * FROM employee_details WHERE employee_id= $id";
 	$result=mysqli_query($conn,$sql);
 	$rowCount=mysqli_num_rows($result);
-	$totalPages=ceil($rowCount/$perPageDisplay);
-
-	$sql1="SELECT * FROM employee_details LIMIT $startFrom,$perPageDisplay";
-	$result1=mysqli_query($conn,$sql1);
-	$rowCount1=mysqli_num_rows($result1);
-	if($rowCount1>0){
-		display($result1);
-	} 
-	else{
-		echo "No data found";
+	if ($rowCount>0) { ?>
+		<?php while ($row=mysqli_fetch_assoc($result)) { ?>
+				<form method="post">
+				<?php echo "<h4> Details of  ".$row['employee_name']; ?></h4>
+					<table>
+						<tr><td><label>Employee ID</label></td>
+						<td></td>
+						<td><strong><?php echo $row['employee_id']; ?></strong></td></tr>
+						<tr><td><label>Employee Name</label></td>
+							<td></td>
+						<td><strong><?php echo $row['employee_name']; ?></strong></td></tr>
+						<tr><td><label>Employee Designation</label></td>
+							<td></td>
+						<td><strong><?php echo $row['employee_designation']; ?></strong></td></tr>
+						<tr><td><label>Employee Mail ID</label></td>
+							<td></td>
+						<td><strong><?php echo $row['employee_mail_id']; ?></strong></td></tr>
+						<tr><td><label>Employee Date of Joining</label></td>
+							<td></td>
+						<td><strong><?php echo $row['employee_doj']; ?></strong></td></tr>
+						<tr><td><label>Employee Mobile Number</label></td>
+							<td></td>
+						<td><strong><?php echo $row['employee_phone']; ?></strong></td></tr>
+						<tr><td><label>Employee Status</label></td>
+							<td></td>
+						<td><strong><?php echo $row['employee_status']; ?></strong></td></tr>
+					</table>
+					<br>
+					<a href="view.php"><button name="submit">BACK</button></a>
+				</form>
+		<?php	}
 	}
-	for ($i=1; $i<=$totalPages; $i++) {
-    echo'<a href="view.php?page='.$i.'&pages='.$perPageDisplay.'"><button>'.$i.'</button></a>';
+	else{
+		echo "<br> No Data Available..!";
 	}
 mysqli_close($conn);
 
- ?>
+?>
