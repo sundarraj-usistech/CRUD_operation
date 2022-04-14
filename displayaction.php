@@ -134,19 +134,55 @@
 <?php 
 	if (isset($_GET['submitpageselection'])) {
 		$pageDisplay=$_GET['pagestodisplay'];
-		header("Location: paginationselection.php?pages=".$pageDisplay);
+		header("Location: displayaction.php?pages=".$pageDisplay);
 	}
  ?>
 <br>
 <?php 
+	require 'dbconnect.php'; 
+	if (isset($_GET['pages'])) {
+		$perPageDisplay=$_GET['pages'];
+	}
+	else{
+		$perPageDisplay=5;
+	}
+	if (isset($_GET['page'])) {
+		$currentPage=$_GET['page'];	
+	}
+	else{
+		$currentPage=1;
+	} 
+	$startFrom=($currentPage-1)*$perPageDisplay;
+	$sql="SELECT * FROM employee_details";
+	$result=mysqli_query($conn,$sql);
+	$rowCount=mysqli_num_rows($result);
+	$totalPages=ceil($rowCount/$perPageDisplay);
+
+	$sql1="SELECT * FROM employee_details LIMIT $startFrom,$perPageDisplay";
+	$result1=mysqli_query($conn,$sql1);
+	$rowCount1=mysqli_num_rows($result1);
+	if($rowCount1>0){
+		display($result1);
+	} 
+	else{
+		echo "No data found";
+	}
+	for ($i=1; $i<=$totalPages; $i++) {
+    echo'<a href="displayaction.php?page='.$i.'&pages='.$perPageDisplay.'"><button>'.$i.'</button></a>';
+	}
+mysqli_close($conn);
+
+ ?>
+<?php 
 	function display($result){ ?>	
-		<table width="100%"><tr><th>Employee ID</th><th>Employee Name</th><th>Designation</th><th>E-Mail ID</th><th>Date of Joining</th><th>Mobile Number</th><th>Employee Status</th><th>Action</th></tr>
+		<table width="50%" align="center"><tr><th>Employee ID</th><th>Employee Name</th><th>Action</th><th>Documents</th></tr>
 				<?php while($data=mysqli_fetch_assoc($result)){
-					echo "<tr><td> ".$data['employee_id']."</td><td> ".$data['employee_name']."</td><td>".$data['employee_designation']."</td><td>".$data['employee_mail_id']."</td><td>".$data['employee_doj']."</td><td>".$data['employee_phone']."</td><td>".$data['employee_status']."</td>" ;
-			?>	<td><a href="edit.php?id=<?php echo $data["employee_id"]; ?>"><button>EDIT</button></a>
-				<a href="delete.php?id=<?php echo $data["employee_id"]; ?>"><button>DELETE</button></a></td></tr>	
+					echo "<tr><td> ".$data['employee_id']."</td><td> ".$data['employee_name']."</td>" ;
+			?>	<td><div class="method"><a href="view.php?id=<?php echo $data["employee_id"]; ?>"><button>VIEW</button></a><a href="edit.php?id=<?php echo $data["employee_id"]; ?>"><button>EDIT</button></a>
+				<a href="delete.php?id=<?php echo $data["employee_id"]; ?>"><button>DELETE</button></a></div></td><td><button>IMAGE</button><a href="upload.php?id=<?php echo $data["employee_id"]; ?>"><button>UPLOAD</button></a>
+				</td></tr>	
 			<?php
 				} 
-			echo "</table>";
+			echo "</table><br>";
 	}
 ?>
