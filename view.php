@@ -1,7 +1,7 @@
 <?php 
 	require 'dbconnect.php';
 	$id=$_GET['id'];
-	$sql="SELECT * FROM employee_details WHERE employee_id= $id";
+	$sql="SELECT * FROM employee_details WHERE employee_id=$id";
 	$result=mysqli_query($conn,$sql);
 	$rowCount=mysqli_num_rows($result);
 	if ($rowCount>0) { ?>
