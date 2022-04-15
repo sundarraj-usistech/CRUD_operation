@@ -179,7 +179,7 @@ mysqli_close($conn);
 				<?php while($data=mysqli_fetch_assoc($result)){
 					echo "<tr><td> ".$data['employee_id']."</td><td> ".$data['employee_name']."</td>" ;
 			?>	<td><div class="method"><a href="view.php?id=<?php echo $data["employee_id"]; ?>"><button>VIEW</button></a><a href="edit.php?id=<?php echo $data["employee_id"]; ?>"><button>EDIT</button></a>
-				<a href="delete.php?id=<?php echo $data["employee_id"]; ?>"><button>DELETE</button></a></div></td><td><a href="viewfile.php?id=<?php echo $data["employee_id"]; ?>"><button>VIEW</button></a><a href="uploadfile.php?id=<?php echo $data["employee_id"]; ?>"><button>UPLOAD</button></a>
+				<a href="delete.php?id=<?php echo $data["employee_id"]; ?>"><button>DELETE</button></a></div></td><td><a href="viewimage.php?id=<?php echo $data["employee_id"]; ?>"><button>VIEW</button></a><a href="uploaddocuments.php?id=<?php echo $data["employee_id"]; ?>"><button>UPLOAD</button></a>
 				</td></tr>	
 			<?php
 				} 

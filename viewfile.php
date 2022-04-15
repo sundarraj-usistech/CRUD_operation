@@ -16,7 +16,10 @@
 			<div class="method">
 			<?php echo $data['document_name']; ?>
 			<br><br>
-			<a href="Uploads/<?php echo $data['document_name']; ?>" target="_blank"><button>VIEW</button></a>
+			<a href="Employee Documents/Documents/<?php echo $data['document_name']; ?>" target="_blank"><button>VIEW</button></a>
+			<br><br>
+			<?php echo $data['image_name']; ?>
+			<a href="Employee Documents/Images/<?php echo $data['image_name']; ?>" target="_blank"><button>VIEW</button></a>
 			</div>
 <?php		}
 	}

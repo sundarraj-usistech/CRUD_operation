@@ -32,7 +32,7 @@
 						<td><strong><?php echo $row['employee_status']; ?></strong></td></tr>
 					</table>
 					<br>
-					<a href="view.php"><button name="submit">BACK</button></a>
+					<button><a href="displayaction.php">BACK</a></button>
 				</form>
 		<?php	}
 	}
